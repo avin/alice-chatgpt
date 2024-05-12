@@ -9,6 +9,8 @@ if (!process.env.CHATGPT_API_KEY) {
   process.exit(1);
 }
 
+console.log('KEY=', `"${process.env.CHATGPT_API_KEY}"`)
+
 app.use(bodyParser.json());
 
 const dialogues = {};
