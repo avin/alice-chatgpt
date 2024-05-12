@@ -64,8 +64,8 @@ app.post("/", async (req, res) => {
         {
           model: "gpt-3.5-turbo",
           messages: dialogues[sessionId],
-          temperature: 0.5,
-          max_tokens: 300
+          temperature: 0.25,
+          max_tokens: 100
         },
         {
           headers: {
