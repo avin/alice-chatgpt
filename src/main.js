@@ -91,6 +91,8 @@ app.post("/", async (req, res) => {
     console.log('<<<', chatGptAnswer, '\n')
 
   } catch (error) {
+    console.log(error.response.data)
+    console.log(error.response.body)
     if (error.response && error.response.status === 401) {
       response.response.text = 'Запрет на использование сервиса.';
     } else if (error.response && error.response.status === 429) {
