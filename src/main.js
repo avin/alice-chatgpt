@@ -9,8 +9,6 @@ if (!process.env.CHATGPT_API_KEY) {
   process.exit(1);
 }
 
-console.log('KEY=', `"${process.env.CHATGPT_API_KEY}"`)
-
 app.use(bodyParser.json());
 
 const dialogues = {};
@@ -71,7 +69,7 @@ app.post("/", async (req, res) => {
         },
         {
           headers: {
-            'Authorization': `Bearer ${process.env.CHATGPT_API_KEY}1`,
+            'Authorization': `Bearer ${process.env.CHATGPT_API_KEY}`,
             'Content-Type': 'application/json'
           },
           proxy
@@ -91,15 +89,16 @@ app.post("/", async (req, res) => {
     console.log('<<<', chatGptAnswer, '\n')
 
   } catch (error) {
-    console.log(error.response.data)
-    console.log(error.response.body)
+    if (error.response && error.response.data) {
+      console.log(error.response.data)
+    }
     if (error.response && error.response.status === 401) {
       response.response.text = 'Запрет на использование сервиса.';
     } else if (error.response && error.response.status === 429) {
       response.response.text = 'Очень много вопросов, подожди немного.';
     } else {
       console.log(error);
-      response.response.text = 'Произошла ошибка при обработке вашего запроса.';
+      response.response.text = 'Произошла непонятная ошибка при обработке вашего запроса.';
     }
   }
 
