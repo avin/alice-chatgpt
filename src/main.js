@@ -64,8 +64,8 @@ app.post("/", async (req, res) => {
         {
           model: "gpt-3.5-turbo",
           messages: dialogues[sessionId],
-          temperature: 0.25,
-          max_tokens: 100
+          temperature: Number(process.env.CHATGPT_API_KEY ?? 0.25),
+          max_tokens: Number(process.env.CHATGPT_MAX_TOKENS ?? 100)
         },
         {
           headers: {
