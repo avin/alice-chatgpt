@@ -62,7 +62,7 @@ app.post("/", async (req, res) => {
     const chatResponse = await axios.post(
         process.env.CHATGPT_API_URL || 'https://api.openai.com/v1/chat/completions',
         {
-          model: "gpt-3.5-turbo",
+          model: process.env.CHATGPT_MODEL || "gpt-3.5-turbo",
           messages: dialogues[sessionId],
           temperature: Number(process.env.CHATGPT_API_KEY ?? 0.25),
           max_tokens: Number(process.env.CHATGPT_MAX_TOKENS ?? 100)
