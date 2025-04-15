@@ -60,7 +60,7 @@ app.post("/", async (req, res) => {
 
   try {
     const chatResponse = await axios.post(
-        'https://api.openai.com/v1/chat/completions',
+        process.env.CHATGPT_API_URL || 'https://api.openai.com/v1/chat/completions',
         {
           model: "gpt-3.5-turbo",
           messages: dialogues[sessionId],
